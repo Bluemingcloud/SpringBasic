@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Spring MVC 설정 파일 -->
+	
+	<!-- HandlerMapping, HandlerAdapter, 어노테이션 활성화 -->
+	<annotation-driven />
+	
+	<!-- 
+	    정적 매핑 설정: CSS, JS 등의 정적 자원에 대한 매핑 설정 
+	    "/resources/**" 경로로 요청이 들어오면 "/resources/" 디렉토리로 매핑
+	-->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 
+	    ViewResolver 설정: 컨트롤러에서 반환한 view 이름을 기반으로 실제 view 파일 경로를 결정
+	    /WEB-INF/views/ + view 이름 + .jsp 경로로 view 파일을 찾음
+	-->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <beans:property name="prefix" value="/WEB-INF/views/" />
+	    <beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	    
+	<!-- 
+	    @Controller, @Service, @Repository, @Component 어노테이션이 붙은 클래스를 
+	    base-package 안에서 스캔하여 Spring Bean으로 자동 등록
+	-->
+	<context:component-scan base-package="com.simple.basic.*" />
+
+	
+	<!-- 서비스 영역을 bean으로 생성 -->
+	<!-- <beans:bean id="scoreService" class="com.simple.basic.service.score.ScoreServiceImpl" /> -->
+	
+	
+	
+	
+	
+	
+</beans:beans>
