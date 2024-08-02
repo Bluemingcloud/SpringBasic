@@ -131,7 +131,11 @@
 		    <scope>test</scope>
 		</dependency>
 	
-		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.3</version> <!-- 적절한 버전을 사용하세요 -->
+		</dependency>
 		
 		
 		
