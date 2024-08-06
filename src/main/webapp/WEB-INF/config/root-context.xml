@@ -5,6 +5,39 @@
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-		<!-- 데이터베이서 연결 or DispatcherServlet 외부에서 동작하는 bean 들이 들어갈 수 있음 -->
-		
+	<!-- 데이터베이서 연결 or DispatcherServlet 외부에서 동작하는 bean 들이 들어갈 수 있음 -->
+	
+	<!-- DB 정보를 외부에서 관리 -->
+	<bean id="DBproperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- classpath:/ 는 java/resources 아래를 나타내는 경로 -->
+		<property name="location" value="classpath:/db-config/application.properties"/>
+	</bean>
+	
+	<!-- DB 연결 커넥션 풀을 bean 으로 미리 생성 (HikariCP, DataSource) -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${ds.driverClassName}" />
+		<property name="jdbcUrl" value="${ds.jdbcUrl}" />
+		<property name="username" value="${ds.username}"/>
+		<property name="password" value="${ds.password}"/>		
+	</bean>
+	<!-- 커넥션 풀 의존성 주입 -->
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg ref="hikariConfig"/>
+	</bean>
+	
+	<!-- MyBatis 사용의 핵심 객체 sessionFactory bean 추가  -->
+	<!-- MyBatis mapper 를 전역 관리하는 factory 객체(bean) -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- DB 정보 -->
+		<property name="dataSource" ref="ds"/>
+		<!-- 설정파일 정보(JSP 에서 mybatis-config.xml) -->
+		<property name="configLocation" value="classpath:/mybatis-config/sql-mapper-config.xml"/>
+		<!-- 생성할 mapper 의 위치정보 -->
+		<property name="mapperLocations" value="classpath:/sqlmap/*.xml"/>
+	</bean>
+	
+	<!-- 매퍼스캔 : 해당 패키지를 읽어서 인터페이스의 위치를 확인 -->
+	<mybatis-spring:scan base-package="com.simple.basic.*"/>
+	
+	
 </beans>

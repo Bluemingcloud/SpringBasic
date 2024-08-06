@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+ <configuration>
+ 	
+ 	<!-- 테이블의 스테이크표기법의 컬럼명을 자바의 카멜표기법으로 변경 -->
+ 	<settings>
+ 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+ 	</settings>
+ 	
+ 	<!-- DB정보는 bean 주입으로 들어감 -->
+ 	<!-- mapper 의 위치정보도 bean 주입으로 들어감 -->
+ 	
+ 	<!-- type 클래스를 alias 단축명으로 사용함 -->
+ 	<!-- resultType 에 객체사용시 길어지는 클래스 명을 간단히 줄이기 위해 사용 -->
+ 	<typeAliases>
+ 		<typeAlias type="com.simple.basic.command.ScoreVO" alias="ScoreVO"/>
+ 		<typeAlias type="com.simple.basic.command.BoardDTO" alias="BoardDTO" />
+ 	</typeAliases>
+ 	
+ </configuration>
+ 

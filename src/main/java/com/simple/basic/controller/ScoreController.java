@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -77,6 +78,13 @@ public class ScoreController {
 	public String scoreForm(ScoreVO vo) {
 		scoreService.regist(vo);
 		return "service/scoreResult"; // 결과 화면
+	}
+	
+	// 삭제요청
+	@RequestMapping("/deleteScore")
+	public String deleteScore(@RequestParam("sno") int sno) {
+		scoreService.delete(sno);
+		return "redirect:/service/scoreList";
 	}
 	
 }

@@ -9,8 +9,10 @@
 		listener클래스와 함께 context-param으로 전달하게 됩니다.
 	-->
 	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/config/root-context.xml</param-value>
+		<param-name>contextConfigLocation</param-name><!-- 전역 설정 위치 -->
+		<param-value>
+			/WEB-INF/config/root-context.xml
+		</param-value>
 	</context-param>
 	
 	<listener>
@@ -28,6 +30,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/config/servlet-context.xml
+				/WEB-INF/config/aspect-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

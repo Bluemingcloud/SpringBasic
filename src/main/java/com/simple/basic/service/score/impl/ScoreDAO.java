@@ -10,4 +10,6 @@ public interface ScoreDAO {
 	
 	public ArrayList<ScoreVO> getList();
 	
+	public void delete(int sno);
+	
 }
